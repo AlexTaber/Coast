@@ -3,7 +3,7 @@ window.onload = function() {
   game = new Phaser.Game(576, 576, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
   function preload() {
-    game.stage.backgroundColor = '#A7AEB4';
+    game.stage.backgroundColor = '#EBD6FF';
     genGlobals();
     boxQuarter = game.load.image('boxQuarter', '../assets/box_quarter.png')
     moves = game.load.spritesheet('moves', '../assets/moves.png',32,576,8)
@@ -27,7 +27,7 @@ window.onload = function() {
     player.create();
 
     foreground = game.add.sprite(0,0, 'foreground');
-    foreground.tint = 0x7C858F
+    foreground.tint = 0xF5EBFF
   }
 
   function update () {
