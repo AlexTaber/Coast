@@ -3,6 +3,7 @@ window.onload = function() {
   game = new Phaser.Game(576, 576, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
   function preload() {
+    game.stage.backgroundColor = '#A7AEB4';
     genGlobals();
     boxQuarter = game.load.image('boxQuarter', '../assets/box_quarter.png')
     moves = game.load.spritesheet('moves', '../assets/moves.png',32,576,8)
@@ -11,9 +12,11 @@ window.onload = function() {
     rotateRight = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
     rotateLeft = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
     cementTop = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    cementBottom = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+
 
     game.allMoves = [];
-    game.turnDuration = 20;
+    game.turnDuration = 80;
     game.turnCountdown = game.turnDuration;
     game.id = 0;
   }
@@ -24,7 +27,7 @@ window.onload = function() {
     player.create();
 
     foreground = game.add.sprite(0,0, 'foreground');
-
+    foreground.tint = 0x7C858F
   }
 
   function update () {
@@ -53,11 +56,14 @@ function finishTurn() {
 }
 
 function generateMoves() {
-  color = COLORS[iRandomRange(0,COLORS.length - 1)];
-  moveNum = iRandomRange(1,4);
+  var colors = COLORS.slice(0);
+  var moveNum = iRandomRange(1,3);
   var sectors = SECTORS.slice(0);
   for(var i = 0; i < moveNum; i++){
+    var color_index = iRandomRange(0,colors.length - 1);
     var sector = sectors[iRandomRange(0,sectors.length - 1)];
+    var color = colors[color_index];
+    colors.splice(color_index,1);
     sectors.splice(i,1);
     new Move(sector[0],sector[1],"Fire",10, color);
   }

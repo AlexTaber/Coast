@@ -23,16 +23,24 @@ Player.prototype.create = function () {
 }
 
 Player.prototype.rotatePlayerRight = function() {
-  var tempMove = this.moves[3];
-  for(var i = 2; i > -1; i--){
-    this.moves[i + 1] = this.moves[i];
+  if(cementTop.isDown) {
+    this.cementTopRight();
+  } else if(cementBottom.isDown) {
+    this.cementBottomRight();
+  } else {
+    var tempMove = this.moves[3];
+    for(var i = 2; i > -1; i--){
+      this.moves[i + 1] = this.moves[i];
+    }
+    this.moves[0] = tempMove
   }
-  this.moves[0] = tempMove
 }
 
 Player.prototype.rotatePlayerLeft = function() {
   if(cementTop.isDown) {
     this.cementTopLeft();
+  } else if(cementBottom.isDown) {
+    this.cementBottomLeft();
   } else {
     var tempMove = this.moves[0];
     for(var i = 1; i < 4; i++){
@@ -48,4 +56,26 @@ Player.prototype.cementTopLeft = function() {
     this.moves[i - 1] = this.moves[i];
   }
   this.moves[3] = tempMove
+}
+
+Player.prototype.cementTopRight = function() {
+  var tempMove = this.moves[3];
+  for (var i = 2; i > 0; i--){
+    this.moves[i + 1] = this.moves[i];
+  }
+  this.moves[1] = tempMove;
+}
+
+Player.prototype.cementBottomRight = function() {
+  var tempMove = this.moves[1];
+  this.moves[1] = this.moves[0];
+  this.moves[0] = this.moves[3];
+  this.moves[3] = tempMove;
+}
+
+Player.prototype.cementBottomLeft = function() {
+  var tempMove = this.moves[1];
+  this.moves[1] = this.moves[3];
+  this.moves[3] = this.moves[0];
+  this.moves[0] = tempMove;
 }
