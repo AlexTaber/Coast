@@ -2,6 +2,14 @@ function iRandomRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+PIXI.Graphics.prototype.bringToFront = function() {
+  if (this.parent) {
+    var parent = this.parent;
+    parent.removeChild(this);
+    parent.addChild(this);
+  }
+}
+
 function genGlobals() {
   COLORS = [
     0xFF0000,
