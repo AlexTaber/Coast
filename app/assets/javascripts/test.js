@@ -8,7 +8,6 @@ window.onload = function() {
     boxQuarter = game.load.image('boxQuarter', '../assets/box_quarter.png')
     moves = game.load.spritesheet('moves', '../assets/moves.png',32,576,8)
     gameForeground = game.load.image('foreground', '../assets/foreground.png')
-    setUpGraphics();
 
     right = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
     left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
@@ -17,6 +16,7 @@ window.onload = function() {
 
 
     game.allMoves = [];
+    game.allSquares = [];
     game.turnDuration = 100;
     game.turnCountdown = game.turnDuration;
     game.id = 0;
@@ -32,6 +32,8 @@ window.onload = function() {
 
     foreground = game.add.sprite(0,0, 'foreground');
     foreground.tint = 0xF5EBFF
+
+    new Squares();
   }
 
   function update () {
@@ -40,14 +42,22 @@ window.onload = function() {
     left.onUp.add(player.rotatePlayerLeft, player);
     down.onUp.add(player.rotatePlayerLeft, player);
 
+    moveMoves();
+    moveSquares();
     finishTurn();
     render();
   }
 
   function render () {
     player.view.drawSquare();
+    for(var i = 0; i < game.allMoves.length; i++) {
+      game.allMoves[i].draw();
+    }
+
+    for(var i = 0; i < game.allSquares.length; i++) {
+      game.allSquares[i].draw();
+    }
     foreground.bringToTop();
-    graphics.bringToFront();
   }
 };
 
@@ -55,10 +65,9 @@ function finishTurn() {
   if (game.turnCountdown <= 0) {
     var success = checkSuccess();
     addScore(success);
-    moveMoves();
-    destroyMoves();
     generateMoves();
     game.turnCountdown = game.turnDuration;
+    new Squares();
   } else {
     game.turnCountdown -= 1;
   }
@@ -79,6 +88,7 @@ function generateMoves() {
 }
 
 function moveMoves() {
+  destroyMoves();
   for(var i = 0; i < game.allMoves.length; i++) {
     game.allMoves[i].move();
   }
@@ -91,8 +101,8 @@ function assignId() {
 
 function destroyMoves() {
   for(var i = 0; i < game.allMoves.length; i++) {
-    if(game.allMoves[i].position >= 8) {
-      game.allMoves[i].gameObject.destroy();
+    if(game.allMoves[i].graphics.position.distance(player.position) < 48) {
+      game.allMoves[i].graphics.destroy();
       game.allMoves.splice(i,1);
       i -= 1;
     }
@@ -126,21 +136,38 @@ function checkSuccess() {
 
 function checkSuccessOfMove(move) {
   if(move.sector[1] == 1){
-    if(player.moves[0].color != move.gameObject.tint){
+    if(player.moves[0].color != move.graphics.tint){
       return false;
     }
   } else if(move.sector[0] == -1){
-    if(player.moves[1].color != move.gameObject.tint){
+    if(player.moves[1].color != move.graphics.tint){
       return false;
     }
   } else if(move.sector[1] == -1){
-    if(player.moves[2].color != move.gameObject.tint){
+    if(player.moves[2].color != move.graphics.tint){
       return false;
     }
   } else {
-    if(player.moves[3].color != move.gameObject.tint){
+    if(player.moves[3].color != move.graphics.tint){
       return false;
     }
   }
   return true;
+}
+
+function moveSquares() {
+  destroySquares();
+  for(var i = 0; i < game.allSquares.length; i++) {
+    game.allSquares[i].move();
+  }
+}
+
+function destroySquares() {
+  for(var i = 0; i < game.allSquares.length; i++) {
+    if(game.allSquares[i].graphics.position.distance(player.position) < 34) {
+      game.allSquares[i].graphics.destroy();
+      game.allSquares.splice(i,1);
+      i -= 1;
+    }
+  }
 }

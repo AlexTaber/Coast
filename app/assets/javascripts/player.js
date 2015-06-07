@@ -1,6 +1,7 @@
 var Player = function() {
   this.x = 288
   this.y = 288
+  this.position = new Phaser.Point(this.x, this.y)
   this.lastCementMove = false;
 }
 
