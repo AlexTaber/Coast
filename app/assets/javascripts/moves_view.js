@@ -4,7 +4,7 @@ Move.prototype.draw = function() {
 
   // draw a shape
   var d = this.graphics.position.distance(player.position)
-  var height = 544 * (d/272) + 32
+  var height = 288 * (d/144) + 32
   var startX = 16;
   var startY = - height / 2
   this.graphics.moveTo(startX, startY);
@@ -15,3 +15,4 @@ Move.prototype.draw = function() {
   this.graphics.endFill();
 
 }
+

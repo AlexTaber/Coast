@@ -1,5 +1,5 @@
 var Squares = function() {
-  this.graphics = game.add.graphics(288,0);
+  this.graphics = game.add.graphics(160,160);
   game.allSquares.push(this);
 }
 

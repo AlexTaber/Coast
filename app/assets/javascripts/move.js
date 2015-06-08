@@ -5,8 +5,8 @@ var Move = function(x,y, type, power, color) {
   this.sector = [x,y];
   this.position = new Phaser.Point(x, y)
   this.graphics = game.add.graphics()
-  this.graphics.x = 288 - (272 * x);
-  this.graphics.y = 288 - (272 * y);
+  this.graphics.x = 160 - (144 * x);
+  this.graphics.y = 320 - (144 * y);
   if(y != 0) this.graphics.angle = 90;
   if(y == 1 && x == 0) this.graphics.angle +=180;
   if(y == 0 && x == 1) this.graphics.angle +=180;
