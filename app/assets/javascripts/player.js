@@ -1,6 +1,8 @@
 var Player = function() {
-  this.x = 288
-  this.y = 288
+  this.x = 160
+  this.y = 320
+  this.position = new Phaser.Point(this.x, this.y)
+  this.lastCementMove = false;
 }
 
 Player.prototype.create = function () {
@@ -23,30 +25,54 @@ Player.prototype.create = function () {
 }
 
 Player.prototype.rotatePlayerRight = function() {
-  if(cementTop.isDown) {
+  if(up.isDown) {
     this.cementTopRight();
-  } else if(cementBottom.isDown) {
+    this.lastCementMove = true;
+  } else if(down.isDown) {
     this.cementBottomRight();
+    this.lastCementMove = true;
+  } else if(left.isDown) {
+    this.cementLeftUp();
+    this.lastCementMove = true;
+  } else if(right.isDown) {
+    this.cementRightUp();
+    this.lastCementMove = true;
   } else {
-    var tempMove = this.moves[3];
-    for(var i = 2; i > -1; i--){
-      this.moves[i + 1] = this.moves[i];
+    if(this.lastCementMove == false) {
+      var tempMove = this.moves[3];
+      for(var i = 2; i > -1; i--){
+        this.moves[i + 1] = this.moves[i];
+      }
+      this.moves[0] = tempMove
+    } else {
+      this.lastCementMove = false;
     }
-    this.moves[0] = tempMove
   }
 }
 
 Player.prototype.rotatePlayerLeft = function() {
-  if(cementTop.isDown) {
+  if(up.isDown) {
     this.cementTopLeft();
-  } else if(cementBottom.isDown) {
+    this.lastCementMove = true;
+  } else if(down.isDown) {
     this.cementBottomLeft();
+    this.lastCementMove = true;
+  } else if(left.isDown) {
+    this.cementLeftDown();
+    this.lastCementMove = true;
+  } else if(right.isDown) {
+    this.cementRightDown();
+    this.lastCementMove = true;
   } else {
-    var tempMove = this.moves[0];
-    for(var i = 1; i < 4; i++){
-      this.moves[i - 1] = this.moves[i];
+    if(this.lastCementMove == false) {
+      var tempMove = this.moves[0];
+      for(var i = 1; i < 4; i++){
+        this.moves[i - 1] = this.moves[i];
+      }
+      this.moves[3] = tempMove
+    } else {
+      this.lastCementMove = false;
     }
-    this.moves[3] = tempMove
   }
 }
 
@@ -78,4 +104,32 @@ Player.prototype.cementBottomLeft = function() {
   this.moves[1] = this.moves[3];
   this.moves[3] = this.moves[0];
   this.moves[0] = tempMove;
+}
+
+Player.prototype.cementLeftDown = function() {
+  var tempMove = this.moves[0];
+  this.moves[0] = this.moves[1];
+  this.moves[1] = this.moves[2];
+  this.moves[2] = tempMove;
+}
+
+Player.prototype.cementLeftUp = function() {
+  var tempMove = this.moves[2];
+  this.moves[2] = this.moves[1];
+  this.moves[1] = this.moves[0];
+  this.moves[0] = tempMove;
+}
+
+Player.prototype.cementRightDown = function() {
+  var tempMove = this.moves[0];
+  this.moves[0] = this.moves[2];
+  this.moves[2] = this.moves[3];
+  this.moves[3] = tempMove;
+}
+
+Player.prototype.cementRightUp = function() {
+  var tempMove = this.moves[2];
+  this.moves[2] = this.moves[0];
+  this.moves[0] = this.moves[3];
+  this.moves[3] = tempMove;
 }
