@@ -134,7 +134,7 @@ function addScore(success) {
   if(success == -1) {
     hud.setFail();
     speedDownMusic();
-    game.multiplyer = Math.max(1, game.multiplyer - 0.25);
+    game.multiplyer = Math.max(1, game.multiplyer - 0.5);
     game.streak = 0;
   } else if(success > 0) {
     hud.setSuccess();
@@ -200,9 +200,9 @@ function speedUpMusic() {
 }
 
 function speedDownMusic() {
-  music._sound.playbackRate.value -= 0.01;
+  music._sound.playbackRate.value -= 0.02;
   music._sound.playbackRate.value = Math.max(music._sound.playbackRate.value, game.originalPlaybackRate );
-  game.turnDuration += game.turnDuration * 0.01;
+  game.turnDuration += game.originalTurnDuration * 0.02;
   game.turnDuration = Math.min(game.originalTurnDuration, game.turnDuration);
 }
 
