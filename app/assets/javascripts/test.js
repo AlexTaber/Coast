@@ -196,7 +196,7 @@ function destroySquares() {
 
 function speedUpMusic() {
   music._sound.playbackRate.value += 0.01;
-  game.turnDuration -= game.turnDuration * 0.01;
+  game.turnDuration -= game.originalTurnDuration * 0.01;
 }
 
 function speedDownMusic() {
