@@ -15,14 +15,14 @@ function genGlobals() {
     0xdd004e,
     0x0cb4d8,
     0x53b436,
-    0xfff700
+    0xEAEA32
   ]
 
   COLORS_KEY = {
     0xdd004e: "red",
     0x0cb4d8: "blue",
     0x53b436: "green",
-    0xfff700: "yello"
+    0xEAEA32: "yellow"
   }
 
 
