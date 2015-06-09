@@ -4,17 +4,16 @@ var Move = function(x,y, type, power, color) {
   this.power = power;
   this.sector = [x,y];
   this.position = new Phaser.Point(x, y)
-  this.graphics = game.add.graphics()
-  this.graphics.x = 160 - (144 * x);
-  this.graphics.y = 320 - (144 * y);
-  if(y != 0) this.graphics.angle = 90;
-  if(y == 1 && x == 0) this.graphics.angle +=180;
-  if(y == 0 && x == 1) this.graphics.angle +=180;
+  this.graphics = game.add.graphics(player.x,player.y)
   game.allMoves.push(this);
   this.color = color;
+  this.radius = 142;
+  if(y == 1) this.sectorNum = 0;
+  else if (x == -1) this.sectorNum = 1;
+  else if (y == -1) this.sectorNum = 2;
+  else this.sectorNum = 3;
 }
 
 Move.prototype.move = function() {
-  this.graphics.x += 30/game.turnDuration * this.sector[0];
-  this.graphics.y += 30/game.turnDuration * this.sector[1];
+  this.radius -= 30/game.turnDuration
 }

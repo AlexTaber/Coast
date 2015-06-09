@@ -3,22 +3,23 @@ var Player = function() {
   this.y = 320
   this.position = new Phaser.Point(this.x, this.y)
   this.lastCementMove = false;
+  this.graphics = game.add.graphics(this.x, this.y)
 }
 
 Player.prototype.create = function () {
   this.moves = []
-  this.moves[0] = game.add.sprite(this.x, this.y - 16, 'boxQuarter');
-  this.moves[0].angle = 270
-  this.moves[1] = game.add.sprite(this.x + 16, this.y, 'boxQuarter');
-  this.moves[1].angle = 0
-  this.moves[2] = game.add.sprite(this.x, this.y + 16, 'boxQuarter');
-  this.moves[2].angle = 90
-  this.moves[3] = game.add.sprite(this.x - 16, this.y, 'boxQuarter');
-  this.moves[3].angle = 180
+  this.moves[0] = game.add.graphics(this.x, this.y);
+  //this.moves[0].angle = 270
+  this.moves[1] = game.add.graphics(this.x, this.y);
+  //this.moves[1].angle = 0
+  this.moves[2] = game.add.graphics(this.x, this.y);
+  //this.moves[2].angle = 90
+  this.moves[3] = game.add.graphics(this.x, this.y);
+  //this.moves[3].angle = 180
 
   for(var i = 0; i < 4; i++) {
     this.moves[i].color = COLORS[i];
-    this.moves[i].anchor.set(.5,.5);
+    //this.moves[i].anchor.set(.5,.5);
   }
 
   this.view = new PlayerView(this);
