@@ -134,3 +134,10 @@ Player.prototype.cementRightUp = function() {
   this.moves[0] = this.moves[3];
   this.moves[3] = tempMove;
 }
+
+Player.prototype.switchHorizontal = function() {
+  console.log("HERE");
+  var tempMove = this.moves[3];
+  this.moves[3] = this.moves[1];
+  this.moves[1] = tempMove;
+}
