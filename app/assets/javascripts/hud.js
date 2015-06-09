@@ -1,7 +1,7 @@
 var Hud = function() {
   this.graphics = game.add.graphics(0,0);
-  this.feedback = game.add.sprite(124,284, 'feedback');
-  this.feedback.alpha = 0;
+  this.feedback = game.add.graphics(player.x,player.y);
+  this.feedback.radius = 64
   this.multiplyerText = game.add.text(game.world.centerX, 60, this.getMultText(), {
       font: "20px Arial",
       fill: "#ff0044",
@@ -40,6 +40,11 @@ Hud.prototype.draw = function() {
 
   //feedback
   this.feedback.alpha = Math.max(this.feedback.alpha - .02, 0);
+  this.feedback.radius += 4
+  this.feedback.clear();
+  this.feedback.lineStyle(12, this.feedback.tint);
+  this.feedback.drawCircle(0,0,this.feedback.radius);
+  this.feedback.bringToFront();
 
   //text
   this.multiplyerText.setText(this.getMultText());
@@ -47,11 +52,13 @@ Hud.prototype.draw = function() {
 }
 
 Hud.prototype.setSuccess = function() {
+  this.feedback.radius = 64
   this.feedback.tint = 0x00FF00;
   this.feedback.alpha = .7;
 }
 
 Hud.prototype.setFail = function() {
+  this.feedback.radius = 64
   this.feedback.tint = 0xFF0000;
   this.feedback.alpha = .7;
 }

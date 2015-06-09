@@ -78,7 +78,7 @@ window.onload = function() {
     hud.draw();
     hud.graphics.bringToFront();
     //foreground.bringToTop();
-    hud.feedback.bringToTop();
+    hud.feedback.bringToFront();
   }
 };
 
