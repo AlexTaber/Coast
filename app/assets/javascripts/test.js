@@ -16,6 +16,7 @@ window.onload = function() {
     left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
     up = game.input.keyboard.addKey(Phaser.Keyboard.UP);
     down = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
     game.sectors = 4
     game.music = pickSong();
@@ -57,6 +58,7 @@ window.onload = function() {
       up.onUp.add(player.rotatePlayerRight, player);
       left.onUp.add(player.rotatePlayerLeft, player);
       down.onUp.add(player.rotatePlayerLeft, player);
+      space.onUp.add(player.switchHorizontal, player);
 
       endGame();
       finishTurn();

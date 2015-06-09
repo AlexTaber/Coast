@@ -14,10 +14,17 @@ function genGlobals() {
   COLORS = [
     0xdd004e,
     0x0cb4d8,
-    0xdd004e,
-    0x0cb4d8
+    //two
+    // 0xdd004e,
+    // 0x0cb4d8
+
+    //four
     // 0x53b436,
     // 0xEAEA32
+
+    //three
+    0xdd004e,
+    0xEAEA32
   ]
 
   COLORS_KEY = {
