@@ -18,6 +18,21 @@ var Hud = function() {
 Hud.prototype.draw = function() {
   this.graphics.clear();
 
+  //cross lines
+  this.graphics.lineStyle(6, 0xF5EBFF);
+  this.graphics.moveTo(50,210);
+  this.graphics.lineTo(270,430);
+
+  this.graphics.lineStyle(6, 0xF5EBFF);
+  this.graphics.moveTo(270,210);
+  this.graphics.lineTo(50,430);
+
+  //circle outline
+  this.graphics.lineStyle(6, 0xF5EBFF, 1);
+  this.graphics.drawCircle(160, 320, 312)
+  this.graphics.bringToFront();
+
+  //top ui
   this.graphics.lineStyle(0);
   this.graphics.beginFill(0x3b0760, 0.8);
   this.graphics.drawRect(0, 0, 320, 160);

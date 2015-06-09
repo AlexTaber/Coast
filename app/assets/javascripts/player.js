@@ -3,6 +3,7 @@ var Player = function() {
   this.y = 320
   this.position = new Phaser.Point(this.x, this.y)
   this.lastCementMove = false;
+  this.graphics = game.add.graphics(this.x, this.y)
 }
 
 Player.prototype.create = function () {

@@ -5,7 +5,7 @@ window.onload = function() {
   function preload() {
     game.stage.backgroundColor = '#EBD6FF';
     boxQuarter = game.load.image('boxQuarter', '../assets/box_quarter.png')
-    gameForeground = game.load.image('foreground', '../assets/foreground.png')
+    //gameForeground = game.load.image('foreground', '../assets/foreground.png')
     feedback = game.load.image('feedback', '../assets/feedback.png')
     game.load.audio('awake', '../assets/awake.mp3');
     game.load.audio('see', '../assets/see.mp3');
@@ -17,9 +17,10 @@ window.onload = function() {
     up = game.input.keyboard.addKey(Phaser.Keyboard.UP);
     down = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
 
+    game.sectors = 4
     game.music = pickSong();
     game.allMoves = [];
-    game.allSquares = [];
+    game.allCircles = [];
     game.originalTurnDuration = game.music[1];
     game.turnDuration = game.originalTurnDuration;
     game.turnCountdown = game.turnDuration;
@@ -43,10 +44,10 @@ window.onload = function() {
     player = new Player()
     player.create();
 
-    foreground = game.add.sprite(0,160, 'foreground');
-    foreground.tint = 0xF5EBFF
+    // foreground = game.add.sprite(0,160, 'foreground');
+    // foreground.tint = 0xF5EBFF
 
-    new Squares();
+    new Circles();
     hud = new Hud();
   }
 
@@ -60,22 +61,23 @@ window.onload = function() {
       endGame();
       finishTurn();
       moveMoves();
-      moveSquares();
+      moveCircles();
       render();
     }
   }
 
   function render () {
-    player.view.drawSquare();
+    player.view.drawSelf();
     for(var i = 0; i < game.allMoves.length; i++) {
       game.allMoves[i].draw();
     }
 
-    for(var i = 0; i < game.allSquares.length; i++) {
-      game.allSquares[i].draw();
+    for(var i = 0; i < game.allCircles.length; i++) {
+      game.allCircles[i].draw();
     }
     hud.draw();
-    foreground.bringToTop();
+    hud.graphics.bringToFront();
+    //foreground.bringToTop();
     hud.feedback.bringToTop();
   }
 };
@@ -87,7 +89,7 @@ function finishTurn() {
     destroyMoves();
     generateMoves();
     game.turnCountdown = game.turnDuration;
-    new Squares();
+    new Circles();
   } else {
     game.turnCountdown -= 1;
   }
@@ -121,7 +123,7 @@ function assignId() {
 
 function destroyMoves() {
   for(var i = 0; i < game.allMoves.length; i++) {
-    if(game.allMoves[i].graphics.position.distance(player.position) < 60) {
+    if(game.allMoves[i].radius < 64) {
       game.allMoves[i].graphics.destroy();
       game.allMoves.splice(i,1);
       i -= 1;
@@ -148,7 +150,7 @@ function addScore(success) {
 function checkSuccess() {
   var times = 0;
   for (var i = 0; i < game.allMoves.length; i++) {
-    if(game.allMoves[i].graphics.position.distance(player.position) < 60){
+    if(game.allMoves[i].radius < 64){
       times += 1;
       if(checkSuccessOfMove(game.allMoves[i]) == false) return -1;
     }
@@ -177,18 +179,18 @@ function checkSuccessOfMove(move) {
   return true;
 }
 
-function moveSquares() {
-  destroySquares();
-  for(var i = 0; i < game.allSquares.length; i++) {
-    game.allSquares[i].move();
+function moveCircles() {
+  destroyCircles();
+  for(var i = 0; i < game.allCircles.length; i++) {
+    game.allCircles[i].move();
   }
 }
 
-function destroySquares() {
-  for(var i = 0; i < game.allSquares.length; i++) {
-    if(game.allSquares[i].graphics.position.distance(player.position) < 34) {
-      game.allSquares[i].graphics.destroy();
-      game.allSquares.splice(i,1);
+function destroyCircles() {
+  for(var i = 0; i < game.allCircles.length; i++) {
+    if(game.allCircles[i].radius < 72) {
+      game.allCircles[i].graphics.destroy();
+      game.allCircles.splice(i,1);
       i -= 1;
     }
   }
