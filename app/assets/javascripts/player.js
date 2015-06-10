@@ -4,6 +4,7 @@ var Player = function() {
   this.position = new Phaser.Point(this.x, this.y)
   this.lastCementMove = false;
   this.graphics = game.add.graphics(this.x, this.y)
+  this.selectedSegment = -1
 }
 
 Player.prototype.create = function () {

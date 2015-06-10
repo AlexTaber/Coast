@@ -8,57 +8,68 @@ PlayerView.prototype.drawSelf = function() {
   var q2 = this.plyr.moves[2];
   var q3 = this.plyr.moves[3];
 
-  q0.clear();
-  q0.lineStyle(0)
-  q0.beginFill(q0.color)
-  q0.arc(0, 0, 32, game.math.degToRad(225), game.math.degToRad(315), false);
-  q0.endFill();
-  q0.bringToFront();
-  q0.beginFill(q0.color);
-  q0.moveTo(-23,-23);
-  q0.lineTo(23,-23);
-  q0.lineTo(0,0);
-  q0.lineTo(-23,-23);
-  q0.endFill();
+  for(var i = 0; i < game.sectors; i++){
 
-  q1.clear();
-  q1.lineStyle(0)
-  q1.beginFill(q1.color)
-  q1.arc(0, 0, 32, game.math.degToRad(315), game.math.degToRad(45), false);
-  q1.endFill();
-  q1.beginFill(q1.color);
-  q1.moveTo(23,-23);
-  q1.lineTo(23,23);
-  q1.lineTo(0,0);
-  q1.lineTo(23,-23);
-  q1.endFill();
+    this.plyr.moves[i].clear();
+    this.plyr.moves[i].lineStyle(0)
+    this.plyr.moves[i].beginFill(this.plyr.moves[i].color)
+    this.plyr.moves[i].arc(0, 0, 32, game.math.degToRad(game.sectorStartAngle + (game.sectorDegrees * i)), game.math.degToRad(game.sectorStartAngle + (game.sectorDegrees * (i+1))), false);
+    this.plyr.moves[i].endFill();
+    this.plyr.moves[i].bringToFront();
+  }
 
+  if(game.sectors == 4) {
+    q0.beginFill(q0.color);
+    q0.moveTo(-23,-23);
+    q0.lineTo(23,-23);
+    q0.lineTo(0,0);
+    q0.lineTo(-23,-23);
+    q0.endFill();
 
-  q2.clear();
-  q2.lineStyle(0)
-  q2.beginFill(q2.color)
-  q2.arc(0, 0, 32, game.math.degToRad(45), game.math.degToRad(135), false);
-  q2.endFill();
-  q2.bringToFront();
-  q2.beginFill(q2.color);
-  q2.moveTo(23,23);
-  q2.lineTo(-23,23);
-  q2.lineTo(0,0);
-  q2.lineTo(23,23);
-  q2.endFill();
+    q1.beginFill(q1.color);
+    q1.moveTo(23,-23);
+    q1.lineTo(23,23);
+    q1.lineTo(0,0);
+    q1.lineTo(23,-23);
+    q1.endFill();
 
-  q3.clear();
-  q3.lineStyle(0)
-  q3.beginFill(q3.color)
-  q3.arc(0, 0, 32, game.math.degToRad(135), game.math.degToRad(225), false);
-  q3.endFill();
-  q3.bringToFront();
-  q3.beginFill(q3.color);
-  q3.moveTo(-23,23);
-  q3.lineTo(-23,-23);
-  q3.lineTo(0,0);
-  q3.lineTo(-23,23);
-  q3.endFill();
+    q2.beginFill(q2.color);
+    q2.moveTo(23,23);
+    q2.lineTo(-23,23);
+    q2.lineTo(0,0);
+    q2.lineTo(23,23);
+    q2.endFill();
+
+    q3.beginFill(q3.color);
+    q3.moveTo(-23,23);
+    q3.lineTo(-23,-23);
+    q3.lineTo(0,0);
+    q3.lineTo(-23,23);
+    q3.endFill();
+  } else if (game.sectors == 3) {
+
+    q0.beginFill(q0.color);
+    q0.moveTo(0,-32);
+    q0.lineTo(0,0);
+    q0.lineTo(28,16);
+    q0.lineTo(0,-30);
+    q0.endFill();
+
+    q1.beginFill(q1.color);
+    q1.moveTo(-29,16);
+    q1.lineTo(0,0);
+    q1.lineTo(29,16);
+    q1.lineTo(-29,16);
+    q1.endFill();
+
+    q2.beginFill(q2.color);
+    q2.moveTo(0,-32);
+    q2.lineTo(0,0);
+    q2.lineTo(-28,16);
+    q2.lineTo(0,-32);
+    q2.endFill();
+
+  }
 
   this.plyr.graphics.clear();
   this.plyr.graphics.lineStyle(6,0xF5EBFF,1)

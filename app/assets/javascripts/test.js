@@ -18,7 +18,9 @@ window.onload = function() {
     down = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
     space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
-    game.sectors = 4
+    game.sectors = 3;
+    game.sectorStartAngle = 270;
+    game.sectorDegrees = 120;
     game.music = pickSong();
     game.allMoves = [];
     game.allCircles = [];
