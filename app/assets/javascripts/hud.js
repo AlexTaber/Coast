@@ -19,13 +19,27 @@ Hud.prototype.draw = function() {
   this.graphics.clear();
 
   //cross lines
-  this.graphics.lineStyle(6, 0xF5EBFF);
-  this.graphics.moveTo(50,210);
-  this.graphics.lineTo(270,430);
+  if (game.sectors == 4){
+    this.graphics.lineStyle(6, 0xF5EBFF);
+    this.graphics.moveTo(50,210);
+    this.graphics.lineTo(270,430);
 
-  this.graphics.lineStyle(6, 0xF5EBFF);
-  this.graphics.moveTo(270,210);
-  this.graphics.lineTo(50,430);
+    this.graphics.lineStyle(6, 0xF5EBFF);
+    this.graphics.moveTo(270,210);
+    this.graphics.lineTo(50,430);
+  } else if(game.sectors == 3) {
+    this.graphics.lineStyle(6, 0xF5EBFF);
+    this.graphics.moveTo(160,160);
+    this.graphics.lineTo(160,320);
+
+    this.graphics.lineStyle(6, 0xF5EBFF);
+    this.graphics.moveTo(296,396);
+    this.graphics.lineTo(160,320);
+
+    this.graphics.lineStyle(6, 0xF5EBFF);
+    this.graphics.moveTo(21,396);
+    this.graphics.lineTo(160,320);
+  }
 
   //circle outline
   this.graphics.lineStyle(6, 0xF5EBFF, 1);

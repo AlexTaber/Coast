@@ -20,7 +20,7 @@ window.onload = function() {
 
     game.sectors = 3;
     game.sectorStartAngle = 270;
-    game.sectorDegrees = 120;
+    game.sectorDegrees = 360 / game.sectors;
     game.music = pickSong();
     game.allMoves = [];
     game.allCircles = [];
@@ -100,11 +100,11 @@ function finishTurn() {
 }
 
 function generateMoves() {
-  var colors = COLORS.slice(0);
+  var colors = COLORS.slice(0, game.sectors);
   var moveNum = iRandomRange(1,3);
-  var sectors = SECTORS.slice(0);
+  var sectors = SECTORS.slice(0,game.sectors);
   for(var i = 0; i < moveNum; i++){
-    var color_index = iRandomRange(0,colors.length - 1);
+    var color_index = iRandomRange(0,colors.length -1);
     var sector_index = iRandomRange(0,sectors.length - 1)
     var sector = sectors[sector_index];
     var color = colors[color_index];
