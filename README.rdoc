@@ -1,28 +1,10 @@
-== README
+== COAST
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Coast is a pursuit in minimal game design, wherein the user is tasked with matching the colors of the central circle to that of the converging arcs.
 
-Things you may want to cover:
+--Instructions
+Right/Up Arrows - Rotate Sectors Clockwise
+Left/Down Arrows - Rotate Sectors Counterclockwise
 
-* Ruby version
+Hold Down Any Arrow to Cement Corresponding Sector to Position (for instance, holding the Up Arrow down, then pressing the Right Arrow, will keep the top sector fixed to the top, while rotating the rest of the sectors clockwise)
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
