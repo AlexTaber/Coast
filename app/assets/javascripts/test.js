@@ -18,7 +18,9 @@ window.onload = function() {
     down = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
     space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
-    game.sectors = 4
+    game.sectors = 4;
+    game.sectorStartAngle = 225;
+    game.sectorDegrees = 360 / game.sectors;
     game.music = pickSong();
     game.allMoves = [];
     game.allCircles = [];
@@ -98,17 +100,17 @@ function finishTurn() {
 }
 
 function generateMoves() {
-  var colors = COLORS.slice(0);
+  var colors = COLORS.slice(0, game.sectors);
   var moveNum = iRandomRange(1,3);
-  var sectors = SECTORS.slice(0);
+  var sectors = SECTORS.slice(0,game.sectors);
   for(var i = 0; i < moveNum; i++){
-    var color_index = iRandomRange(0,colors.length - 1);
+    var color_index = iRandomRange(0,colors.length -1);
     var sector_index = iRandomRange(0,sectors.length - 1)
     var sector = sectors[sector_index];
     var color = colors[color_index];
     colors.splice(color_index,1);
     sectors.splice(sector_index,1);
-    new Move(sector[0],sector[1],"Fire",10, color);
+    new Move(sector,"Fire",10, color);
   }
 }
 
@@ -161,20 +163,8 @@ function checkSuccess() {
 }
 
 function checkSuccessOfMove(move) {
-  if(move.sector[1] == 1){
-    if(player.moves[0].color != move.color){
-      return false;
-    }
-  } else if(move.sector[0] == -1){
-    if(player.moves[1].color != move.color){
-      return false;
-    }
-  } else if(move.sector[1] == -1){
-    if(player.moves[2].color != move.color){
-      return false;
-    }
-  } else {
-    if(player.moves[3].color != move.color){
+  for(var i = 0; i < game.sectors; i++) {
+    if(i == move.sectorNum && move.color != player.moves[i].color){
       return false;
     }
   }

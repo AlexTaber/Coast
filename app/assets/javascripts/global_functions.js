@@ -35,12 +35,7 @@ function genGlobals() {
   }
 
 
-  SECTORS = [
-    [1,0],
-    [-1,0],
-    [0,1],
-    [0,-1]
-  ]
+  SECTORS = [0,1,2,3]
 
   SONGS =[
     [game.add.audio('awake'), 146, 1.1],
