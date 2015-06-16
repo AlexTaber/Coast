@@ -1,4 +1,4 @@
-== COAST
+# COAST
 
 Coast is a pursuit in minimal game design, wherein the user is tasked with matching the colors of the central circle to that of the converging arcs.
 
