@@ -1,0 +1,11 @@
+canvas {
+  margin: 0 auto;
+}
+
+.info {
+  display: none;
+  font-family: 'Droid Sans', serif;
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
