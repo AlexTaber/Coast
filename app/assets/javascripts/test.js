@@ -3,7 +3,7 @@ window.onload = function() {
   game = new Phaser.Game(320, 480, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
   function preload() {
-    game.stage.backgroundColor = '#EBD6FF';
+    game.stage.backgroundColor = '#AEC6CF';
     boxQuarter = game.load.image('boxQuarter', '../assets/box_quarter.png')
     //gameForeground = game.load.image('foreground', '../assets/foreground.png')
     feedback = game.load.image('feedback', '../assets/feedback.png')
@@ -81,6 +81,8 @@ window.onload = function() {
     }
     hud.draw();
     hud.graphics.bringToFront();
+    hud.multiplyerText.bringToTop();
+    hud.scoreText.bringToTop();
     //foreground.bringToTop();
     hud.feedback.bringToFront();
   }

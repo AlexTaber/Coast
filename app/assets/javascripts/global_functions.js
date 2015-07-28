@@ -12,15 +12,15 @@ PIXI.Graphics.prototype.bringToFront = function() {
 
 function genGlobals() {
   COLORS = [
-    0xdd004e,
-    0x0cb4d8,
+    0xFF6961,
+    0x779ECB,
     //two
     // 0xdd004e,
     // 0x0cb4d8
 
     //four
-    0x53b436,
-    0xEAEA32
+    0xFFB347,
+    0x77DD77
 
     //three
     // 0xdd004e,
