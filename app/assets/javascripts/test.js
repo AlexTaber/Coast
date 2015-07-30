@@ -4,12 +4,13 @@ window.onload = function() {
 
   function preload() {
     game.stage.backgroundColor = '#AEC6CF';
+    game.load.crossOrigin = 'anonymous';
     boxQuarter = game.load.image('boxQuarter', '../assets/box_quarter.png')
     //gameForeground = game.load.image('foreground', '../assets/foreground.png')
     feedback = game.load.image('feedback', '../assets/feedback.png')
-    game.load.audio('awake', '../assets/awake.mp3');
-    game.load.audio('see', '../assets/see.mp3');
-    game.load.audio('take', '../assets/take.mp3');
+    game.load.audio('awake', 'https://s3-us-west-2.amazonaws.com/coast-game-assets/awake.mp3');
+    game.load.audio('see', 'https://s3-us-west-2.amazonaws.com/coast-game-assets/see.mp3');
+    game.load.audio('take', 'https://s3-us-west-2.amazonaws.com/coast-game-assets/take.mp3');
     genGlobals();
 
     right = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
